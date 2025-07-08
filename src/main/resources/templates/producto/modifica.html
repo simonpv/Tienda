@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-
 <html xmlms="http://www.w3.org/1999/xhtml"
       xlmns:th="http://www.thymeleaf.org">
-    <head></head>
+    <head th:replace="~{layout/plantilla :: head}"></head>
     <body>
         <header th:replace="~{layout/plantilla :: header}"></header>"
+
+        <section th:replace="~{producto/fragmentos :: editarProducto}" ></section>
+              
         <footer th:replace="~{layout/plantilla :: footer}"></footer>"
     </body>
 </html>

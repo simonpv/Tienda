@@ -22,6 +22,9 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
+    @Autowired
+    private FirebaseStorageServiceImpl firebaseStorageService;
+    
     @GetMapping("/listado")
     public String inicio(Model model) {
         var categorias = categoriaService.getCategorias(false);
@@ -35,12 +38,11 @@ public class CategoriaController {
         return "/categoria/modifica";
     }
 
-    @Autowired
-    private FirebaseStorageServiceImpl firebaseStorageService;
-    
+
     @PostMapping("/guardar")
     public String categoriaGuardar(Categoria categoria,
             @RequestParam("imagenFile") MultipartFile imagenFile) {        
+        
         if (!imagenFile.isEmpty()) {
             categoriaService.save(categoria);
             categoria.setRutaImagen(

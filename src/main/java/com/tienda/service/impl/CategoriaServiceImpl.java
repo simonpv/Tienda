@@ -1,6 +1,7 @@
 
 
 package com.tienda.service.impl;
+
 import com.tienda.dao.CategoriaDao;
 import com.tienda.domain.Categoria;
 import com.tienda.service.CategoriaService;
@@ -11,14 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
-
+    
+    //inyecccion
     @Autowired
     private CategoriaDao categoriaDao;
 
     @Override
     @Transactional(readOnly = true)
     public List<Categoria> getCategorias(boolean activos) {
-        var lista = categoriaDao.findAll();
+        List<Categoria> lista = categoriaDao.findAll();
         if (activos) {
             lista.removeIf(e -> !e.isActivo());
         }
@@ -40,6 +42,6 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     @Transactional
     public void delete(Categoria categoria) {
-        categoriaDao.delete(categoria);
+        categoriaDao.deleteById(categoria.getIdCategoria());
     }
 }
