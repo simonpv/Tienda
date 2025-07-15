@@ -1,5 +1,3 @@
-
-
 package com.tienda.service.impl;
 
 import com.tienda.dao.ProductoDao;
@@ -12,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
-    
+
     //inyecccion
     @Autowired
     private ProductoDao productoDao;
@@ -44,4 +42,29 @@ public class ProductoServiceImpl implements ProductoService {
     public void delete(Producto producto) {
         productoDao.deleteById(producto.getIdProducto());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup) {
+        return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> buscarPorParteDescripcion(String termino) {
+        return productoDao.findByPrecioBetweenContainingIgnoreCase(termino);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> metodoJPQL(double precioInf, double precioSup) {
+        return productoDao.metodoJPQL(precioInf, precioSup);
+    }
+    
+     @Override
+    @Transactional(readOnly=true)    
+    public List<Producto> metodoNativo(double precioInf, double precioSup) {
+        return productoDao.metodoNativo(precioInf, precioSup);
+    }
+    
 }
